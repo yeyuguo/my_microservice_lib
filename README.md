@@ -1,64 +1,54 @@
-[微服务参考webpack](https://github.com/anderlaw/react-webpack-MF)
 
-
-
-## 启动项目
-
-### 开发环境
+## 项目启动
+直接用 lerna 启动微任务与主任务
 ```sh
-yarn dev
-yarn serve
+lerna run start
 ```
 
-
-### 生产环境
+### 微服务程序启动
 ```sh
-yarn build:b // 生成浏览器端
-yarn serve
+cd microservice_lib
+yarn start
 ```
 
-
-
-
-###  启动微服务
-
-#### 1. 正常生成 dist/util-libs.js 文件
+### 主程序服务启动
 ```sh
-yarn build
+cd main-app
+yarn start
 ```
 
 
-
-####  2. 生成微服务文件 dist-remote/util-remote.js
-```sh
-# 生成微服务文件
-yarn build:mic
-# 提供可访问微服务
-yarn serve:mic
-```
-
-
-#### 3. 在主应用中加载 微服务
-
-webpack 加载微服务
-```javascript
-// 在主应用中加载微服务应用
-// 此处是主应用的逻辑
-new ModuleFederationPlugin({
-  name: "main_app",
-  remotes:{
-    "microservice-lib":"microservice_lib@http://localhost:8888/util-remote.js"
-  }
-})
-
-```
-
-
-
-业务代码使用微服务
+常用 lerna 命令
 ```js
-const utils = require('microservice-lib/util-libs')
-console.log('utils: ', utils);
-utils && utils.test()
+// 常用
+lerna bootstrap  // 安装所有依赖项并链接任何交叉依赖项
+//例 node_modules 下载到根目录: 
+lerna bootstrap --npm-client yarn --use-workspaces
+//例 node_modules 下载到各自模块里: 
+lerna bootstrap --npm-client yarn 
+
+lerna exec       // 在每个包中执行任意命令
+//例: lerna exec 'yarn remove lodash' // 删除
+
+lerna add        // 安装依赖，支持交叉依赖
+// lerna add packageA --scope=packageB
+
+// 版本发布
+lerna changed    // 检查自上次发布以来哪些软件包已经更新
+lerna diff       // 自上次发布以来，对所有包或单个包进行区分
+lerna publish    // 发布版本
+
+// 常用
+lerna clean      // 清除项目中所有 node_modules
+lerna init       // 初始化项目
+lerna create     // 创建项目中的子package
+
+// 其它
+lerna run        // 在包含该脚本的包中运行 npm 脚本
+lerna info       // 查看信息
+lerna import     // 导入
+lerna link       // 软链
+lerna version    // 查看版本
+lerna ls         // 列出当前 lerna 项目中的公共包
 
 ```
