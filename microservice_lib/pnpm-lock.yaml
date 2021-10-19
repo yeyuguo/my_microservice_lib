@@ -11,11 +11,13 @@ specifiers:
   babel-preset-env: ^1.7.0
   core-js: ^3.18.3
   serve: ^12.0.1
+  typedoc: ^0.22.6
   typescript: ^4.4.4
   webpack: '5'
   webpack-cli: ^4.9.1
 
 dependencies:
+  typedoc: 0.22.6_typescript@4.4.4
   webpack: 5.58.2_webpack-cli@4.9.1
   webpack-cli: 4.9.1_webpack@5.58.2
 
@@ -1979,7 +1981,6 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha1-6D46fj8wCzTLnYf2FfoMvzV2kO4=, tarball: balanced-match/download/balanced-match-1.0.2.tgz}
-    dev: true
 
   /big.js/5.2.2:
     resolution: {integrity: sha1-ZfCvOC9Xi83HQr2cKB6cstd2gyg=, tarball: big.js/download/big.js-5.2.2.tgz}
@@ -2009,7 +2010,6 @@ packages:
     dependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
-    dev: true
 
   /braces/3.0.2:
     resolution: {integrity: sha1-NFThpGLujVmeI23zNs2epPiv4Qc=, tarball: braces/download/braces-3.0.2.tgz}
@@ -2190,7 +2190,6 @@ packages:
 
   /concat-map/0.0.1:
     resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=, tarball: concat-map/download/concat-map-0.0.1.tgz}
-    dev: true
 
   /content-disposition/0.5.2:
     resolution: {integrity: sha1-DPaLud318r55YcOoUXjLhdunjLQ=, tarball: content-disposition/download/content-disposition-0.5.2.tgz}
@@ -2449,7 +2448,6 @@ packages:
 
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=, tarball: fs.realpath/download/fs.realpath-1.0.0.tgz}
-    dev: true
 
   /fsevents/2.3.2:
     resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, tarball: fsevents/download/fsevents-2.3.2.tgz}
@@ -2512,7 +2510,6 @@ packages:
       minimatch: 3.0.4
       once: 1.4.0
       path-is-absolute: 1.0.1
-    dev: true
 
   /globals/11.12.0:
     resolution: {integrity: sha1-q4eVM4hooLq9hSV1gBjCp+uVxC4=, tarball: globals/download/globals-11.12.0.tgz}
@@ -2583,11 +2580,9 @@ packages:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
-    dev: true
 
   /inherits/2.0.4:
     resolution: {integrity: sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=, tarball: inherits/download/inherits-2.0.4.tgz}
-    dev: true
 
   /ini/1.3.8:
     resolution: {integrity: sha1-op2kJbSIBvNHZ6Tvzjlyaa8oQyw=, tarball: ini/download/ini-1.3.8.tgz}
@@ -2745,6 +2740,10 @@ packages:
       minimist: 1.2.5
     dev: true
 
+  /jsonc-parser/3.0.0:
+    resolution: {integrity: sha1-q914VwHH5+rKip7IzwcMpRp0WiI=, tarball: jsonc-parser/download/jsonc-parser-3.0.0.tgz}
+    dev: false
+
   /kind-of/6.0.3:
     resolution: {integrity: sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=, tarball: kind-of/download/kind-of-6.0.3.tgz}
     engines: {node: '>=0.10.0'}
@@ -2792,6 +2791,16 @@ packages:
       yallist: 2.1.2
     dev: true
 
+  /lru-cache/5.1.1:
+    resolution: {integrity: sha1-HaJ+ZxAnGUdpXa9oSOhH8B2EuSA=, tarball: lru-cache/download/lru-cache-5.1.1.tgz}
+    dependencies:
+      yallist: 3.1.1
+    dev: false
+
+  /lunr/2.3.9:
+    resolution: {integrity: sha1-GLEjFCgyM33W6WTfGlp3B7JdNeE=, tarball: lunr/download/lunr-2.3.9.tgz}
+    dev: false
+
   /make-dir/2.1.0:
     resolution: {integrity: sha1-XwMQ4YuL6JjMBwCSlaMK5B6R5vU=, tarball: make-dir/download/make-dir-2.1.0.tgz}
     engines: {node: '>=6'}
@@ -2806,6 +2815,12 @@ packages:
     dependencies:
       semver: 6.3.0
     dev: true
+
+  /marked/3.0.7:
+    resolution: {integrity: sha1-NDqtnpG5Ykm0lcmcUS6gnP4G3h4=, tarball: marked/download/marked-3.0.7.tgz}
+    engines: {node: '>= 12'}
+    hasBin: true
+    dev: false
 
   /merge-stream/2.0.0:
     resolution: {integrity: sha1-UoI2KaFN0AyXcPtq1H3GMQ8sH2A=, tarball: merge-stream/download/merge-stream-2.0.0.tgz}
@@ -2842,7 +2857,6 @@ packages:
     resolution: {integrity: sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=, tarball: minimatch/download/minimatch-3.0.4.tgz}
     dependencies:
       brace-expansion: 1.1.11
-    dev: true
 
   /minimist/1.2.5:
     resolution: {integrity: sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=, tarball: minimist/download/minimist-1.2.5.tgz}
@@ -2923,13 +2937,18 @@ packages:
     resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=, tarball: once/download/once-1.4.0.tgz}
     dependencies:
       wrappy: 1.0.2
-    dev: true
 
   /onetime/5.1.2:
     resolution: {integrity: sha1-0Oluu1awdHbfHdnEgG5SN5hcpF4=, tarball: onetime/download/onetime-5.1.2.tgz}
     engines: {node: '>=6'}
     dependencies:
       mimic-fn: 2.1.0
+    dev: false
+
+  /onigasm/2.2.5:
+    resolution: {integrity: sha1-zE0qeaD6C2TK7B9MfqNnWFpnaJI=, tarball: onigasm/download/onigasm-2.2.5.tgz}
+    dependencies:
+      lru-cache: 5.1.1
     dev: false
 
   /os-homedir/1.0.2:
@@ -2977,7 +2996,6 @@ packages:
   /path-is-absolute/1.0.1:
     resolution: {integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18=, tarball: path-is-absolute/download/path-is-absolute-1.0.1.tgz}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /path-is-inside/1.0.2:
     resolution: {integrity: sha1-NlQX3t5EQw0cEa9hAn+s8HS9/FM=, tarball: path-is-inside/download/path-is-inside-1.0.2.tgz}
@@ -3299,6 +3317,14 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /shiki/0.9.12:
+    resolution: {integrity: sha1-cMvIwbt4/3s1b4Sn7s2wQO/d0kc=, tarball: shiki/download/shiki-0.9.12.tgz}
+    dependencies:
+      jsonc-parser: 3.0.0
+      onigasm: 2.2.5
+      vscode-textmate: 5.2.0
+    dev: false
+
   /signal-exit/3.0.5:
     resolution: {integrity: sha1-nj6MwMdamUcrRDIQM6dwLnc4JS8=, tarball: signal-exit/download/signal-exit-3.0.5.tgz}
 
@@ -3466,6 +3492,21 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /typedoc/0.22.6_typescript@4.4.4:
+    resolution: {integrity: sha1-ESL4Om61zX27JtGSTeH53p6MfH4=, tarball: typedoc/download/typedoc-0.22.6.tgz}
+    engines: {node: '>= 12.10.0'}
+    hasBin: true
+    peerDependencies:
+      typescript: 4.0.x || 4.1.x || 4.2.x || 4.3.x || 4.4.x
+    dependencies:
+      glob: 7.2.0
+      lunr: 2.3.9
+      marked: 3.0.7
+      minimatch: 3.0.4
+      shiki: 0.9.12
+      typescript: 4.4.4
+    dev: false
+
   /typescript/4.4.4:
     resolution: {integrity: sha1-LNAaGh8WBwTTEB/VpY/w+fy4Aww=, tarball: typescript/download/typescript-4.4.4.tgz}
     engines: {node: '>=4.2.0'}
@@ -3511,6 +3552,10 @@ packages:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=, tarball: vary/download/vary-1.1.2.tgz}
     engines: {node: '>= 0.8'}
     dev: true
+
+  /vscode-textmate/5.2.0:
+    resolution: {integrity: sha1-AfAXYKOR6CIv5PM/vMvRrXGu104=, tarball: vscode-textmate/download/vscode-textmate-5.2.0.tgz}
+    dev: false
 
   /watchpack/2.2.0:
     resolution: {integrity: sha1-R9ePVBX+VQ7NdA+Z/iiCMjpYsc4=, tarball: watchpack/download/watchpack-2.2.0.tgz}
@@ -3637,11 +3682,14 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=, tarball: wrappy/download/wrappy-1.0.2.tgz}
-    dev: true
 
   /yallist/2.1.2:
     resolution: {integrity: sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=, tarball: yallist/download/yallist-2.1.2.tgz}
     dev: true
+
+  /yallist/3.1.1:
+    resolution: {integrity: sha1-27fa+b/YusmrRev2ArjLrQ1dCP0=, tarball: yallist/download/yallist-3.1.1.tgz}
+    dev: false
 
   /yocto-queue/0.1.0:
     resolution: {integrity: sha1-ApTrPe4FAo0x7hpfosVWpqrxChs=, tarball: yocto-queue/download/yocto-queue-0.1.0.tgz}

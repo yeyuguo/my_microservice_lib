@@ -62,3 +62,15 @@ console.log('utils: ', utils);
 utils && utils.test()
 
 ```
+
+
+
+
+
+
+## 生成文档
+```sh
+# 9999 端口
+yarn doc
+
+```

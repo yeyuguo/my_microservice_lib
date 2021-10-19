@@ -4,7 +4,7 @@ console.log('ModuleFederationPlugin: ', ModuleFederationPlugin);
 
 const config = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     // 基础生成文件配置
     path: path.resolve(__dirname, './dist'),
@@ -15,6 +15,13 @@ const config = {
     // 微服务地址
     // publicPath: "http://localhost:8888/", // service 启动端口
     // clean:true
+  },
+  resolve: {
+    // typescript 不会自动查找文件, 得配置该信息
+    extensions: ['.ts', '.js', '.json'],
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
   },
   externals: {
     'lodash': {

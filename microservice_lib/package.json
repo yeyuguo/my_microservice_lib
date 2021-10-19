@@ -13,12 +13,21 @@
     "start": "npm run build && npm run build:mic && npm run serve:mic",
     "build:mic": "webpack --config webpack.mic.js",
     "serve:mic": "serve dist-remote -p 8888",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "typedoc src/index.ts",
+    "serve:doc": "serve docs -p 9999"
   },
-  "keywords": ["webpack5", "typescript", "microservice", "微服务", "util"],
+  "keywords": [
+    "webpack5",
+    "typescript",
+    "microservice",
+    "微服务",
+    "util"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "typedoc": "^0.22.6",
     "webpack": "5",
     "webpack-cli": "^4.9.1"
   },
