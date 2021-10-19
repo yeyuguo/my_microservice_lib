@@ -1,45 +1,19 @@
 const path = require('path');
+const baseConfig = require('./webpack.base.js')
+const {ModuleFederationPlugin} = require('webpack').container
 
 const config = {
-  mode: 'production',
-  entry: './src/index.js',
+  ...baseConfig,
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'util-libs.js',
+    filename: 'util-libs.js', // 普通生成文件
     libraryTarget: 'umd', // 可在 commondjs 和 AMD 模式下正常执行
     globalObject: 'this',
-    // libraryExport: 'default',
-    library: 'utils' // 暴露的API
-  },
-  externals: {
-    'lodash': {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: 'lodash',
-      root: '_'
-    }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      // 开发环境
-      // {
-      //     test: /\.tsx?$/,
-      //     use: 'ts-loader',
-      //     exclude: /node_modules/,
-      // },
-      // 生产环境
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-    ]
-  },
+    library: 'utils', // 暴露的API
+    // 微服务地址
+    // publicPath: "http://localhost:8888/", // service 启动端口
+    // clean:true
+  }
 }
 
 // console.log('process.env.production: ', process.env);

@@ -4,11 +4,14 @@
   "description": "typescript 生产 util 为微服务",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --watch",
+    "dev": "webpack --config webpack.config --watch",
+    "build": "webpack --config webpack.config",
+    "build:mic": "webpack --config webpack.mic.js",
     "build:b": "npm run build && cp ./dist/util-libs.js examples/browser",
     "build:node": "npm run build && cp dist/util-libs.js examples/node/ && node examples/node/util-libs.js",
     "serve": "serve examples/browser -p 8888",
+    "serve:dist": "serve dist -p 8888",
+    "serve:mic": "serve dist-remote -p 8888",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["webpack5", "typescript", "microservice", "微服务", "util"],
