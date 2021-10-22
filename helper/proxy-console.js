@@ -8,7 +8,7 @@ function documentStyle(result) {
     // <div>(${loc})</div>
     if (!document) return;
     document.write(
-      `<span style="color: aqua;">行号 ${(documentStyle.consoleIndex += 1)} ------ console.log 分割符号 -----------</span>
+      `<span style="color: aqua;">行号 ${(documentStyle.consoleIndex += 1)} ------ 自制打印机 -----------</span>
       <p>${result}</p>
       `
     );
