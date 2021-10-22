@@ -1,5 +1,6 @@
 
-## 项目启动
+
+# 项目启动
 直接用 lerna 启动微任务与主任务
 ```sh
 lerna run start
@@ -18,7 +19,7 @@ yarn start
 ```
 
 
-常用 lerna 命令
+# 常用 lerna 命令
 ```js
 // 常用
 lerna bootstrap  // 安装所有依赖项并链接任何交叉依赖项
@@ -51,4 +52,39 @@ lerna link       // 软链
 lerna version    // 查看版本
 lerna ls         // 列出当前 lerna 项目中的公共包
 
+```
+
+
+
+# git submodule
+
+## **Tips**
+
+### 1. 初始化安装
+
+```bash
+# 后面的路径是前端项目的地址 这样可以保持之前原有的项目结构
+git submodule add [git-submodule-remote-url] [submodule-install-path]
+```
+
+#### 1.1. 报错： already exists in the index
+在主项目重新拉取项目
+```bash
+ # 报错信息： git clone '[submodule-install-path]' already exists in the index
+git rm --cached [submodule-install-path] && rm -d [submodule-install-path]
+git submodule add [git-remote] [submodule-install-path]
+```
+
+#### 1.2 【非1和1.1的方式】使用 update 方式更新线上到本地
+```bash
+git submodule set-url [submodule-install-path] [git-submodule-remote-url]
+git submodule update --init --recursive 
+```
+
+
+
+### 2. 已有 submodule 的项目下载 submodule
+```bash
+# 例如clone union-coupon项目:  git clone --recurse-submodules [git-submodule-remote-url]
+git clone --recurse-submodules ***
 ```
