@@ -4,16 +4,3 @@
  */
 export * as utilBase from './base/index'
 export * as utilApp from './app/index'
-
-
-
-// 测试代码
-export function test() {
-  console.log('运行成功2:  hello world!')
-}
-export function print() {
-  function check(name: string) {
-    return 'hello, ' + name
-  }
-  console.log('check("world"): ', check('world'))
-}
