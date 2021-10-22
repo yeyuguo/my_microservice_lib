@@ -34,7 +34,7 @@ function createFactoryProxy(source, handler) {
                 // 函数执行时, 做 try catch 处理
                 apply(funTarget, context, arguemntsList) {
                   try {
-                    if(property === 'log') {
+                    if(['log', 'warning'].includes(property)) {
                       // let result = []
                       // arguemntsList.forEach(item=>{
                       //   let _result
