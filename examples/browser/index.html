@@ -1,18 +1,42 @@
-
 <html>
   <head>
-      <title>webpack library example - Transalating numbers</title>
-      <script type='text/javascript' src='https://unpkg.com/lodash@4.16.6'></script>
+    <title>webpack library example - Transalating numbers</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/lodash@4.16.6"
+    ></script>
+    <style>
+      body {
+        background: #333;
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
-      <div id='root'>
-      </div>
-      <script type='text/javascript' src='../../dist/util-libs.js'></script>
-      <script type='text/javascript'>
-        //   document.getElementById('root').innerHTML = " This is a browser example where and api is called to transalate 'One' to '1' \n Results: wordtonum('One') === " + webpackNumbers.wordtonum('One');
-        console.log('utils: ', utils);
-        utils.test()
-        utils && utils.print()
-      </script>
+    <div id="root"></div>
+    <div id="console"></div>
+    <script type="text/javascript" src="../../helper/proxy-console.js"></script>
+    <script type="text/javascript" src="../../dist/util-libs.js"></script>
+    <script>
+      // 测试输出信息
+      function test1() {
+        var a = 1,
+          b = 3;
+        return a + b;
+      }
+      function test21() {
+        var a = 1,
+          b = 3;
+        return a * b + 10;
+      }
+      console.log('test1(): ', test1());
+      console.log('test21(): ', test21());
+    </script>
+    <script type="text/javascript">
+      //   document.getElementById('root').innerHTML = " This is a browser example where and api is called to transalate 'One' to '1' \n Results: wordtonum('One') === " + webpackNumbers.wordtonum('One');
+      console.log('utils: ', utils);
+      utils.test();
+      utils && utils.print();
+    </script>
   </body>
 </html>

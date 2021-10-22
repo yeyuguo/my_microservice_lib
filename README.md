@@ -9,6 +9,7 @@
 yarn dev
 yarn serve
 ```
+访问地址 [http://127.0.0.1:8888/examples/browser/](http://127.0.0.1:8888/examples/browser/)
 
 
 ### 生产环境
