@@ -12,6 +12,43 @@ yarn serve
 访问地址 [http://127.0.0.1:8888/examples/browser/](http://127.0.0.1:8888/examples/browser/)
 
 
+#### 第三方网址测试方法
+```js
+loadScript('http://localhost:8888/dist/util-libs.js', ()=> {
+  console.log('utils: ', utils);
+  console.log(utils.utilApp)
+  console.log(utils.utilBase)
+})
+function loadScript(url, callback) {
+  try {
+    let script = document.createElement("script");
+    if (script.readyState) {
+      // IE
+      script.onreadystatechange = function () {
+        if (
+          script.readyState === "loaded" ||
+          script.readyState === "complete"
+        ) {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else {
+      // 其他浏览器
+      script.onload = function () {
+        callback();
+      };
+    }
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  } catch (error) {
+    console.log("error: ", error);
+  }
+}
+
+```
+
+
 ### 生产环境
 ```sh
 yarn build:b // 生成浏览器端
@@ -75,3 +112,27 @@ utils && utils.test()
 yarn doc
 
 ```
+
+
+
+
+## todo 列表
+
+- [ ] 埋点
+  - [ ] 埋点服务
+  - [ ] 点击埋点
+  - [ ] 曝光埋点
+  - [ ] 曝光时长埋点
+  - [ ] 错误埋点
+  - [ ] 公共错误
+- [ ] 公共注册插件
+  - [ ] 公共请求插件
+- [ ] 设计模式模版化
+
+
+
+
+
+## 参考文章
+- [个人封装常用utils](https://github.com/dragonir/Utils.js#uuidgenerator)   
+ - 

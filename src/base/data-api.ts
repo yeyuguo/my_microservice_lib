@@ -55,4 +55,5 @@ setDataset.toJson = function(data:object):string {
 }
 
 
-export default setDataset
+ 
+
