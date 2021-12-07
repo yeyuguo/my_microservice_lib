@@ -81,3 +81,55 @@ export function getLatestFull(){
 
 }
 
+
+
+interface countdown {
+  time: {
+    year:number,month: number,day: number,hour: number,minute: number,second:number,
+  }
+  isStop: Boolean
+}
+interface time {
+  year:number,month: number,day: number,hour: number,minute: number,second:number,
+}
+/** 倒计时 
+ * 需求: 1. 每秒状态; 2. 毫秒状态 3. 每多少时间执行函数; 4.获取当前倒计时是否停止;
+ * 
+*/
+class CountDown {
+  end: number;
+  times: time;
+  // times: time;
+  constructor(end: number, format: string) {
+    this.end = end
+    this.times = {
+      year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0
+    }
+  }
+  /**
+   * 倒计时计算 - 递归
+   * 1. 可设置倒计时计算频率:   秒/毫秒/间隔时间
+  */
+  calculate() {
+    const current = new Date()
+  }
+  // 获取公共时间差
+  getTimeDiff() {}
+  // 倒计时是否停止
+  isStop() {
+    return +new Date() >= this.end
+  }
+  // 是否过期
+  isExpired() {
+    return +new Date() > this.end
+  }
+
+  // todo 依赖注入解耦以下场景
+  // 获取渲染字符
+  getTimeDiffString(format:string) {}
+  // 定时间隔执行
+  runTaskInterval() {}
+  // 定时器停止执行
+  runTaskStop() {}
+
+}
