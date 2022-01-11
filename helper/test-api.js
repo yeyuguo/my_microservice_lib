@@ -39,7 +39,7 @@ const ct = new utilBase.CountDown({end: new Date('2022-01-11 11:30'),interval: 1
 function intervalFn(time){
   console.log('time: ', printObj(time));
 }
-ct.start()
+// ct.start()
 console.log('ct.isExpired(): ', ct.isExpired());
 // 倒计时 end
 
