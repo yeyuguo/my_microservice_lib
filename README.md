@@ -12,7 +12,7 @@ yarn serve
 访问地址 [http://127.0.0.1:8888/examples/browser/](http://127.0.0.1:8888/examples/browser/)
 
 
-#### 第三方网址测试方法
+#### 在第三方网址测试方法
 ```js
 loadScript('http://localhost:8888/dist/util-libs.js', ()=> {
   console.log('utils: ', utils);

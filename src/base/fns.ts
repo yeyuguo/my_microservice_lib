@@ -1,4 +1,4 @@
-/**todo 科里华 
+/**科里华 
  * 
 */
 export function curry<F extends (...args: any[]) => any>(fn:F, paramsLen: number=fn.length, ...args:any):any {
@@ -8,3 +8,4 @@ export function curry<F extends (...args: any[]) => any>(fn:F, paramsLen: number
     return curry.bind(null, fn, paramsLen, ...args);
   }
 }
+

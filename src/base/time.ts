@@ -83,38 +83,70 @@ export function getLatestFull(){
 
 
 
+
+interface time {
+  day: number,hour: number,minute: number,second:number,miniSecond:number
+}
 interface countdown {
-  time: {
-    year:number,month: number,day: number,hour: number,minute: number,second:number,
-  }
+  time: time, 
   isStop: Boolean
 }
-interface time {
-  year:number,month: number,day: number,hour: number,minute: number,second:number,
+
+interface countdownParams {
+  end: number,
+  interval?: number,
+  intervalFn ?:(times: time)=>{},
+  completeFn ?:(isStop: boolean)=>{},
 }
 /** 倒计时 
- * 需求: 1. 每秒状态; 2. 毫秒状态 3. 每多少时间执行函数; 4.获取当前倒计时是否停止;
+ * 需求: 1. 每秒状态; 2. 毫秒状态  3. 获取当前倒计时是否停止; 4. 每多少时间执行函数; 5.倒计时结束处理;
  * 
 */
 class CountDown {
   end: number;
-  times: time;
+  time: time;
+  timeout: number;
+  interval: number;
+  intervalFn?: (times: time)=>{};
+  completeFn?: (isStop: boolean)=>{};
   // times: time;
-  constructor(end: number, format: string) {
-    this.end = end
-    this.times = {
-      year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0
+  constructor(option: countdownParams) {
+    this.end = option.end
+    this.intervalFn = option.intervalFn
+    this.completeFn = option.completeFn
+    this.interval = option.interval || 1000
+
+    this.timeout = 0
+    this.time = {
+      day: 0, hour: 0, minute: 0, second: 0, miniSecond: 0
     }
   }
   /**
    * 倒计时计算 - 递归
    * 1. 可设置倒计时计算频率:   秒/毫秒/间隔时间
   */
-  calculate() {
-    const current = new Date()
+  getTime(end:number):time {
+    const now = +new Date()
+    let diff = end - now
+    const _second = 1000, _minute = 60 * _second, _hour = 60 * _minute, _day = 24 * _hour
+    
+    const day = Math.floor(diff/_day)
+
+    diff = diff - day * _day
+    const hour = Math.floor(diff/_hour)
+
+    diff = diff - hour * _hour
+    const minute = Math.floor(diff/_minute)
+
+    diff = diff - minute * _minute
+    const second = Math.floor(diff/_second)
+
+    diff = diff - second * _second
+    const miniSecond = Math.floor(diff)
+
+    return { day, hour, minute, second, miniSecond }
   }
-  // 获取公共时间差
-  getTimeDiff() {}
+  
   // 倒计时是否停止
   isStop() {
     return +new Date() >= this.end
@@ -123,13 +155,23 @@ class CountDown {
   isExpired() {
     return +new Date() > this.end
   }
-
-  // todo 依赖注入解耦以下场景
-  // 获取渲染字符
-  getTimeDiffString(format:string) {}
   // 定时间隔执行
-  runTaskInterval() {}
-  // 定时器停止执行
-  runTaskStop() {}
+  runTaskInterval() {
+    if(this.timeout){
+      clearTimeout(this.timeout)
+    }
+    this.timeout = window.setTimeout(() =>{
+      this.time = this.getTime(this.end)
+      this.intervalFn && this.intervalFn(this.time)
+      if(!this.isExpired()) {
+        this.runTaskInterval()
+      }
+    }, this.interval)
+  }
+  // 获取公共时间差
+  getTimeDiff() {
+
+  }
+ 
 
 }
