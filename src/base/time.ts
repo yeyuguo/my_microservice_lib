@@ -102,7 +102,7 @@ interface countdownParams {
  * 需求: 1. 每秒状态; 2. 毫秒状态  3. 获取当前倒计时是否停止; 4. 每多少时间执行函数; 5.倒计时结束处理;
  * 
 */
-class CountDown {
+export class CountDown {
   end: number;
   time: time;
   timeout: number;
@@ -120,6 +120,9 @@ class CountDown {
     this.time = {
       day: 0, hour: 0, minute: 0, second: 0, miniSecond: 0
     }
+  }
+  start(){
+    this.runTaskInterval()
   }
   /**
    * 倒计时计算 - 递归

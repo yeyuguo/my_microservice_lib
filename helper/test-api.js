@@ -34,11 +34,18 @@ console.log('utilBase.Sub(0.1, 0.2): ', utilBase.Sub(0.1, 0.2));
 console.log('utilBase.Mul(0.1, 0.2): ', utilBase.Mul(0.1, 0.2));
 console.log('utilBase.Div(0.1, 0.2): ', utilBase.Div(0.1, 0.2));
 console.log('utilBase.curry(Math.max, 3)(31,33,32): ', utilBase.curry(Math.max, 3)(31,33,32));
+// 倒计时 start
+const ct = new utilBase.CountDown({end: new Date('2022-01-11 11:23'),interval: 1000, intervalFn})
+function intervalFn(time){
+  console.log('time: ', printObj(time));
+}
+// ct.start()
+// 倒计时 end
 
 // utilBase.loadScript('https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.core.min.js', function(){
 //   console.log('_.isEmpty: ', _.isEmpty(0));
 // })
-
+11
 console.log(' --------------------------------- 打印 utilApp ----------- ')
 console.log('utilApp: ', utilApp);
 

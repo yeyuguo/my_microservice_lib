@@ -1,7 +1,7 @@
 // base 入口文件
 
 // 时间
-export { formatTime, getLatest } from './time'
+export { formatTime, getLatest, CountDown } from './time'
 
 // url 相关
 export { getParam, toQuery, serialize, loadScript } from './url'
