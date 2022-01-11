@@ -128,6 +128,9 @@ class CountDown {
   getTime(end:number):time {
     const now = +new Date()
     let diff = end - now
+    if(diff < 0) {
+      diff = 0
+    }
     const _second = 1000, _minute = 60 * _second, _hour = 60 * _minute, _day = 24 * _hour
     
     const day = Math.floor(diff/_day)
