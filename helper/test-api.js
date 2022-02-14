@@ -45,7 +45,7 @@ const ct = new utilBase.CountDown({
 function intervalFn(time){
   console.log('time: ', printObj(time));
 }
-ct.start()
+// ct.start()
 console.log('ct.isExpired(): ', ct.isExpired());
 
 const ct2 = new utilBase.CountDown({isPrecision: true, end: +new Date('2022-02-14 14:38'),interval: 2000, intervalFn: (time)=>{
