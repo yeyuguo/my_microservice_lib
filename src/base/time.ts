@@ -85,44 +85,99 @@ export function getLatestFull(){
 
 
 interface time {
-  day: number,hour: number,minute: number,second:number,miniSecond:number
+  day: String, 
+  hour: String,
+  minute: String,
+  second:String,
+  miniSecond: String
 }
-interface countdown {
-  time: time, 
-  isStop: Boolean
-}
-
 interface countdownParams {
   end: number,
   interval?: number,
-  intervalFn ?:(times: time)=>{},
-  completeFn ?:(isStop: boolean)=>{},
+  isPrecision?: boolean,
+  isZero: boolean,
+  isImmediate: boolean,
+  intervalFn ?:(times: time, ctx: any)=>{},
 }
 /** 倒计时 
  * 需求: 1. 每秒状态; 2. 毫秒状态  3. 获取当前倒计时是否停止; 4. 每多少时间执行函数; 5.倒计时结束处理;
- * 
+ * @param {Number} end 结束时间
+ * @param {Number} interval 定时器
+ * @param {Boolean} isPrecision 是否需要精度控制
+ * @param {Boolean} isZero 是否需要前缀补0
+ * @param {Boolean} isImmediate 是否需要立即执行
+ * @param {Function} intervalFn 每次定时到达的回调
 */
 export class CountDown {
   end: number;
   time: time;
   timeout: number;
   interval: number;
-  intervalFn?: (times: time)=>{};
-  completeFn?: (isStop: boolean)=>{};
-  // times: time;
+  isPrecision: boolean;
+  isZero: boolean;
+  isImmediate: boolean;
+  intervalFn?: (times: time, ctx: any)=>{};
+
   constructor(option: countdownParams) {
     this.end = option.end
-    this.intervalFn = option.intervalFn
-    this.completeFn = option.completeFn
     this.interval = option.interval || 1000
-
+    this.isPrecision = option.isPrecision || false
+    this.isZero = option.isZero || true
+    this.isImmediate = option.isImmediate || true
+    this.intervalFn = option.intervalFn
     this.timeout = 0
-    this.time = {
-      day: 0, hour: 0, minute: 0, second: 0, miniSecond: 0
-    }
+    this.time = this.getTime(0)
   }
   start(){
-    this.runTaskInterval()
+    if(this.isImmediate) {
+      this.intervalFn && this.intervalFn(this.time, this)
+    }
+    if(this.isPrecision) {
+      this.runTaskIntervalPrecision(this.interval, 0)
+    }else{
+      const timeoutCallback = () => {
+        this.runTaskInterval(this.interval, timeoutCallback)
+      }
+      this.runTaskInterval(this.interval, timeoutCallback)
+    }
+  }
+  // 是否过期
+  isExpired() {
+    return +new Date() > this.end
+  }
+  // 倒计时是否停止
+  isStop() {
+    return +new Date() >= this.end
+  }
+  // 定时间隔执行
+  runTaskInterval(interval: number, timeoutCallback: any) {
+    if(this.timeout){
+      clearTimeout(this.timeout)
+    }
+    this.timeout = window.setTimeout(() =>{
+      this.time = this.getTime(this.end)
+      this.intervalFn && this.intervalFn(this.time, this)
+      if(!this.isExpired()) {
+        // 定时器内部自执行函数
+        timeoutCallback && timeoutCallback()
+      }
+    }, interval)
+  }
+  // 解决精度问题
+  runTaskIntervalPrecision(interval: number, count: number) {
+    if(!count) count = 0
+    let cacheTime = +new Date()
+    // 定时执行递归的函数
+    const _pricesion = () => {
+      // 保留打印 count 该注释，为了检查 count 调试检查递归次数
+      // console.log('count: ', count);
+      const current = +new Date()
+      let offset = current - (cacheTime + count * interval)
+      const nextTimeout = interval - offset
+      this.runTaskInterval(nextTimeout, _pricesion)
+      count += 1
+    }
+    this.runTaskInterval(interval, _pricesion)
   }
   /**
    * 倒计时计算 - 递归
@@ -149,35 +204,37 @@ export class CountDown {
 
     diff = diff - second * _second
     const miniSecond = Math.floor(diff)
-
-    return { day, hour, minute, second, miniSecond }
-  }
-  
-  // 倒计时是否停止
-  isStop() {
-    return +new Date() >= this.end
-  }
-  // 是否过期
-  isExpired() {
-    return +new Date() > this.end
-  }
-  // 定时间隔执行
-  runTaskInterval() {
-    if(this.timeout){
-      clearTimeout(this.timeout)
+    let result = { 
+      day: ''+day, 
+      hour: ''+hour, 
+      minute: ''+minute, 
+      second: ''+second, 
+      miniSecond: ''+miniSecond 
     }
-    this.timeout = window.setTimeout(() =>{
-      this.time = this.getTime(this.end)
-      this.intervalFn && this.intervalFn(this.time)
-      if(!this.isExpired()) {
-        this.runTaskInterval()
+    if(this.isZero) {
+      const timeLength = 2
+      result = {
+        day: this.addZero(day, timeLength), 
+        hour: this.addZero(hour, timeLength), 
+        minute: this.addZero(minute, timeLength), 
+        second: this.addZero(second, timeLength), 
+        miniSecond: this.addZero(miniSecond, timeLength) 
       }
-    }, this.interval)
+    }else{
+      result = { 
+        day: ''+day, 
+        hour: ''+hour, 
+        minute: ''+minute, 
+        second: ''+second, 
+        miniSecond: ''+miniSecond 
+      }
+    }
+    return result
   }
-  // 获取公共时间差
-  getTimeDiff() {
-
+  addZero(num: number|string, length: number):string{
+    if((num + "").length >= length) {
+      return ""+num;
+    }
+    return this.addZero("0" + num, length)
   }
- 
-
 }
