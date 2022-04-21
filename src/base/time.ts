@@ -214,7 +214,7 @@ export class CountDown {
     if(this.isZero) {
       const timeLength = 2
       result = {
-        day: this.addZero(day, timeLength), 
+        day: '' + day,
         hour: this.addZero(hour, timeLength), 
         minute: this.addZero(minute, timeLength), 
         second: this.addZero(second, timeLength), 
