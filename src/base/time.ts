@@ -126,7 +126,7 @@ export class CountDown {
     this.isImmediate = option.isImmediate || true
     this.intervalFn = option.intervalFn
     this.timeout = 0
-    this.time = this.getTime(0)
+    this.time = this.getTime(this.end || 0)
   }
   start(){
     if(this.isImmediate) {
