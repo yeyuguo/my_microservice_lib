@@ -66,3 +66,10 @@ export function loadScript(url: string, callback: () => {}) {
     console.log("error: ", error);
   }
 }
+
+
+
+
+/** 不刷新页面，清除参数
+ * todo 应用场景： 登陆回来有标识，需要删除url参数
+ */
