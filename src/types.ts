@@ -7,9 +7,9 @@ export type InterfaceObject = {
 // 接口的返回数据格式
 export type InterfaceDataApiResult = {
   code: number | null,
-  status: number | null,
-  message: string | null | undefined,
-  dataset: any
+  status?: number | null,
+  message?: string | null | undefined,
+  dataset?: any
 }
 
 /** 验证对象 key 是否有效 */
