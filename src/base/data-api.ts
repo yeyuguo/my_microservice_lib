@@ -80,6 +80,7 @@ setDataset.toJson = function(data:object):string {
 
 
 // TODO 测试
+// TODO 单例
 export class SetDataset {
   private CODECONST: CODETYPE // 不能让外部和子类调用
   constructor(codeDict: CODETYPE ) {
